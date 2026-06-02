@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Games Hub</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== THEME TOGGLE ===== -->
+  <button id="theme-toggle" class="theme-btn" title="Toggle Dark/Light Mode">🌙</button>
+
+  <!-- ===== CONFETTI CANVAS ===== -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ===== HOME SCREEN ===== -->
+  <section id="home" class="screen active">
+    <div class="hub-header">
+      <div class="hub-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">GAME HUB</span>
+        <span class="logo-bracket">]</span>
+      </div>
+      <p class="hub-tagline">Choose your challenge. Prove your skill.</p>
+    </div>
+
+    <div class="game-grid">
+      <div class="game-card" data-game="tictactoe" tabindex="0">
+        <div class="card-glow"></div>
+        <div class="card-icon">❌⭕</div>
+        <h2 class="card-title">Tic Tac Toe</h2>
+        <p class="card-desc">Classic 2-player battle. X vs O. Who will dominate the grid?</p>
+        <span class="card-tag">2 PLAYERS</span>
+      </div>
+
+      <div class="game-card" data-game="rps" tabindex="0">
+        <div class="card-glow"></div>
+        <div class="card-icon">✊✋✌️</div>
+        <h2 class="card-title">Rock Paper Scissors</h2>
+        <p class="card-desc">Challenge the machine. Outsmart its random logic.</p>
+        <span class="card-tag">VS CPU</span>
+      </div>
+
+      <div class="game-card" data-game="guess" tabindex="0">
+        <div class="card-glow"></div>
+        <div class="card-icon">🔢</div>
+        <h2 class="card-title">Guess the Number</h2>
+        <p class="card-desc">A hidden number 1–100. Hunt it down with your intuition.</p>
+        <span class="card-tag">SOLO</span>
+      </div>
+
+      <div class="game-card" data-game="memory" tabindex="0">
+        <div class="card-glow"></div>
+        <div class="card-icon">🧠</div>
+        <h2 class="card-title">Memory Flip</h2>
+        <p class="card-desc">Flip and match. Test your memory against the clock.</p>
+        <span class="card-tag">BRAIN GAME</span>
+      </div>
+    </div>
+
+    <div class="high-scores-bar">
+      <span class="hs-label">🏆 HIGH SCORES:</span>
+      <span class="hs-item">RPS Wins: <b id="hs-rps">0</b></span>
+      <span class="hs-item">Memory Best: <b id="hs-memory">--</b></span>
+      <span class="hs-item">Guess Best: <b id="hs-guess">--</b></span>
+    </div>
+  </section>
+
+  <!-- ===== TIC TAC TOE ===== -->
+  <section id="tictactoe" class="screen game-screen">
+    <div class="game-container">
+      <button class="back-btn">← BACK</button>
+      <h1 class="game-title">Tic Tac Toe</h1>
+      <div class="ttt-status" id="ttt-status">Player <span class="ttt-x">X</span>'s Turn</div>
+      <div class="ttt-board" id="ttt-board">
+        <div class="ttt-cell" data-index="0"></div>
+        <div class="ttt-cell" data-index="1"></div>
+        <div class="ttt-cell" data-index="2"></div>
+        <div class="ttt-cell" data-index="3"></div>
+        <div class="ttt-cell" data-index="4"></div>
+        <div class="ttt-cell" data-index="5"></div>
+        <div class="ttt-cell" data-index="6"></div>
+        <div class="ttt-cell" data-index="7"></div>
+        <div class="ttt-cell" data-index="8"></div>
+      </div>
+      <div class="ttt-score-row">
+        <div class="score-box x-score">X <span id="score-x">0</span></div>
+        <div class="score-box draw-score">DRAW <span id="score-draw">0</span></div>
+        <div class="score-box o-score">O <span id="score-o">0</span></div>
+      </div>
+      <button class="btn-primary" id="ttt-restart">RESTART</button>
+    </div>
+  </section>
+
+  <!-- ===== ROCK PAPER SCISSORS ===== -->
+  <section id="rps" class="screen game-screen">
+    <div class="game-container">
+      <button class="back-btn">← BACK</button>
+      <h1 class="game-title">Rock Paper Scissors</h1>
+      <div class="rps-arena">
+        <div class="rps-side player-side">
+          <div class="rps-label">YOU</div>
+          <div class="rps-choice" id="player-choice">❓</div>
+        </div>
+        <div class="rps-vs">VS</div>
+        <div class="rps-side cpu-side">
+          <div class="rps-label">CPU</div>
+          <div class="rps-choice" id="cpu-choice">❓</div>
+        </div>
+      </div>
+      <div class="rps-result" id="rps-result">Make your move!</div>
+      <div class="rps-btns">
+        <button class="rps-btn" data-choice="rock">✊<span>Rock</span></button>
+        <button class="rps-btn" data-choice="paper">✋<span>Paper</span></button>
+        <button class="rps-btn" data-choice="scissors">✌️<span>Scissors</span></button>
+      </div>
+      <div class="rps-score-row">
+        <div class="score-box x-score">WIN <span id="rps-wins">0</span></div>
+        <div class="score-box draw-score">DRAW <span id="rps-draws">0</span></div>
+        <div class="score-box o-score">LOSE <span id="rps-losses">0</span></div>
+      </div>
+      <button class="btn-secondary" id="rps-reset">RESET SCORE</button>
+    </div>
+  </section>
+
+  <!-- ===== GUESS THE NUMBER ===== -->
+  <section id="guess" class="screen game-screen">
+    <div class="game-container">
+      <button class="back-btn">← BACK</button>
+      <h1 class="game-title">Guess the Number</h1>
+      <div class="guess-meta">
+        <span>Range: <b>1 – 100</b></span>
+        <span>Attempts: <b id="guess-attempts">0</b></span>
+        <span>Best: <b id="guess-best">--</b></span>
+      </div>
+      <div class="guess-hint" id="guess-hint">I'm thinking of a number…</div>
+      <div class="guess-thermometer">
+        <div class="thermo-bar" id="thermo-bar"></div>
+        <div class="thermo-labels"><span>1</span><span>100</span></div>
+      </div>
+      <div class="guess-input-row">
+        <input type="number" id="guess-input" class="guess-input" min="1" max="100" placeholder="Enter guess…" />
+        <button class="btn-primary" id="guess-submit">GUESS</button>
+      </div>
+      <div class="guess-history" id="guess-history"></div>
+      <button class="btn-secondary" id="guess-restart">NEW GAME</button>
+    </div>
+  </section>
+
+  <!-- ===== MEMORY FLIP ===== -->
+  <section id="memory" class="screen game-screen">
+    <div class="game-container">
+      <button class="back-btn">← BACK</button>
+      <h1 class="game-title">Memory Flip</h1>
+      <div class="memory-meta">
+        <span>Moves: <b id="mem-moves">0</b></span>
+        <span>Time: <b id="mem-time">0s</b></span>
+        <span>Best: <b id="mem-best">--</b></span>
+      </div>
+      <div class="memory-grid" id="memory-grid"></div>
+      <button class="btn-secondary" id="mem-restart">NEW GAME</button>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
