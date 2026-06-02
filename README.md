@@ -86,4 +86,8 @@ This project brings together multiple classic games in one smooth, animated, and
 
 ---
 
-## 📂 Project Structure
+
+│
+└── assets/ (optional)
+├── sounds/
+├── images/
